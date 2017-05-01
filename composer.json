@@ -1,0 +1,28 @@
+{
+    "name": "diatem-net/jin-image",
+    "description": "Utility classes to work with images.",
+    "type": "library",
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "Loïc Gérard",
+            "email": "lgerard@diatem.net"
+        },
+        {
+            "name": "Samuel Marchal",
+            "email": "smarchal@diatem.net"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0",
+        "ext-gd": "*",
+        "ext-imagick": "*",
+        "diatem-net/jin-filesystem": "~2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jin2\\": "src/"
+        }
+    }
+}
