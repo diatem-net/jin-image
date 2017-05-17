@@ -16,7 +16,7 @@ class FormatConverter
   /**
    * @var string  Chemin d'accès à la ressource image
    */
-  private $imagePath;
+  protected $imagePath;
 
   /**
    * Constructeur

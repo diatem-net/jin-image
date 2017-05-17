@@ -15,12 +15,12 @@ class ImagePart
   /**
    * @var resource  Ressource image contenant la portion coupée
    */
-  private $cuttedRessource;
+  protected $cuttedRessource;
 
   /**
    * @var Image  Image source
    */
-  private $srcImage;
+  protected $srcImage;
 
   /**
    * Constructeur

@@ -18,107 +18,107 @@ class GeoJsonToImage
   /**
    * @var array Données GeoJson
    */
-  private $geoJsonArray;
+  protected $geoJsonArray;
 
   /**
    * @var array Coordonnées GPS min /max array('so' => array('lat' => float, 'lon' => float), 'ne' => array('lat' => float, 'lon' => float))
    */
-  private $geoBoundsLatLong;
+  protected $geoBoundsLatLong;
 
   /**
    * @var array Coordonnées en mètres min /max array('so' => array('xm' => int, 'ym' => int), 'ne' => array('xm' => int, 'ym' => int))
    */
-  private $geoBoundsMeters;
+  protected $geoBoundsMeters;
 
   /**
    * @var int Nombre des formes tracées
    */
-  private $shapesCount = 0;
+  protected $shapesCount = 0;
 
   /**
    * @var int Taille w ou h minimum de l'image à générer
    */
-  private $minSize;
+  protected $minSize;
 
   /**
    * @var int Largeur de l'image qui sera générée
    */
-  private $outputWidth;
+  protected $outputWidth;
 
   /**
    * @var int Hauteur de l'image qui sera générée
    */
-  private $outputheight;
+  protected $outputheight;
 
   /**
    * @var string Format d'image (jpeg ou png)
    */
-  private $imageFormat = Image::IMAGE_TYPE_JPG;
+  protected $imageFormat = Image::IMAGE_TYPE_JPG;
 
   /**
    * @var int Qualité d'image (de 0 à 100)
    */
-  private $imageQuality;
+  protected $imageQuality;
 
   /**
    * @var string Couleur de fond. Si NULL transparent (#hexa)
    */
-  private $bgColor;
+  protected $bgColor;
 
   /**
    * @var string Couleur de remplissage par défaut des formes. (#hexa)
    */
-  private $fillColor = '#000000';
+  protected $fillColor = '#000000';
 
   /**
    * @var string Si non NULL : attribut du GeoJson utilisé pour déterminer la couleur de remplissage de la forme
    */
-  private $fillColorBasedOnAttribute;
+  protected $fillColorBasedOnAttribute;
 
   /**
    * @var array Si non NULL : tableau de correspondance entre les valeurs de l'attribut GeoJson (fillColorBasedOnAttribute) et une couleur.
    */
-  private $fillColorBasedOnAttributeCorresp;
+  protected $fillColorBasedOnAttributeCorresp;
 
   /**
    * @var float Opacité de la couleur de remplissage (de 0 à 1)
    */
-  private $fillColorOpacity = 1;
+  protected $fillColorOpacity = 1;
 
   /**
    * @var string Cible sur laquelle appeler la fonction de callback
    */
-  private $drawShapeCallBackTarget;
+  protected $drawShapeCallBackTarget;
 
   /**
    * @var string Fonction de callback à appeler après le traitement
    */
-  private $drawShapeCallBackFunctionName;
+  protected $drawShapeCallBackFunctionName;
 
   /**
    * @var string Couleur par défaut des lignes des formes. (#hexa)
    */
-  private $strokeColor = '#000000';
+  protected $strokeColor = '#000000';
 
   /**
    * @var float Opacité par défaut des lignes. de 0 à 1
    */
-  private $strokeColorOpacity = 1;
+  protected $strokeColorOpacity = 1;
 
   /**
    * @var int Largeur des lignes des tracés
    */
-  private $strokeWidth = 0;
+  protected $strokeWidth = 0;
 
   /**
    * @var string Si non NULL : attribut du GeoJson utilisé pour déterminer la couleur des lignes de la forme
    */
-  private $strokeColorBasedOnAttribute;
+  protected $strokeColorBasedOnAttribute;
 
   /**
    * @var array Si non NULL : tableau de correspondance entre les valeurs de l'attribut GeoJson (strokeColorBasedOnAttribute) et une couleur.
    */
-  private $strokeColorBasedOnAttributeCorresp;
+  protected $strokeColorBasedOnAttributeCorresp;
 
   /**
    * Constructeur
@@ -432,7 +432,7 @@ class GeoJsonToImage
    *
    * @throws \Exception
    */
-  private function checkSource()
+  protected function checkSource()
   {
     if (is_null($this->geoJsonArray)) {
       throw new \Exception('Vous devez spécifier un GeoJson grace aux methodes populateFromGeoJsonFile() ou polulateFromGeoJsonString()');
@@ -446,7 +446,7 @@ class GeoJsonToImage
    * @return array
    * @throws \Exception
    */
-  private function checkGeoJson($geoJsonString)
+  protected function checkGeoJson($geoJsonString)
   {
     $json = json_decode($data, $geoJsonString);
     if (!is_array($json)) {
@@ -460,7 +460,7 @@ class GeoJsonToImage
    *
    * @return \Imagick
    */
-  private function getResult()
+  protected function getResult()
   {
     $p1m = $this->geoBoundsMeters['so'];
     $p2m = $this->geoBoundsMeters['ne'];
@@ -590,7 +590,7 @@ class GeoJsonToImage
   /**
    * Analyse du GeoJson
    */
-  private function analyse()
+  protected function analyse()
   {
     $this->calculateGeoBound();
     $this->calculateOutputSize();
@@ -599,7 +599,7 @@ class GeoJsonToImage
   /**
    * Calcul des coordonnées GPS extrèmes
    */
-  private function calculateGeoBound()
+  protected function calculateGeoBound()
   {
     $minLat = 1000;
     $maxLat = 0;
@@ -642,7 +642,7 @@ class GeoJsonToImage
   /**
    * Calcul de la taille de l'image de sortie
    */
-  private function calculateOutputSize()
+  protected function calculateOutputSize()
   {
     $p1m = $this->geoBoundsMeters['so'];
     $p2m = $this->geoBoundsMeters['ne'];
@@ -679,7 +679,7 @@ class GeoJsonToImage
    * @param  int $xm       Coordonnée X en mètre à transformer en relatif
    * @return int
    */
-  private function getRelX($minXm, $maxXm, $minX, $maxX, $xm)
+  protected function getRelX($minXm, $maxXm, $minX, $maxX, $xm)
   {
     return round($minX + (($maxX - $minX) * (($xm - $minXm) / ($maxXm - $minXm))));
   }
@@ -694,7 +694,7 @@ class GeoJsonToImage
    * @param  int $ym       Coordonnée Y en mètre à transformer en relatif
    * @return int
    */
-  private function getRelY($minYm, $maxYm, $minY, $maxY, $ym)
+  protected function getRelY($minYm, $maxYm, $minY, $maxY, $ym)
   {
     return round($maxY - (($maxY - $minY) * (($ym - $minYm) / ($maxYm - $minYm))));
   }
@@ -707,7 +707,7 @@ class GeoJsonToImage
    * @param  float $lon
    * @return array array('xm' => float, 'xy' => float)
    */
-  private function latLonToMeters($lat, $lon)
+  protected function latLonToMeters($lat, $lon)
   {
     $mx = $lon * $this->originShift / 180.0;
     $my = log(tan((90 + $lat) * M_PI / 360.0)) / (M_PI / 180.0);

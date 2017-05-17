@@ -27,37 +27,37 @@ class Image
   /**
    * @var string  Chemin du fichier
    */
-  private $path;
+  protected $path;
 
   /**
    * @var ressource  Ressource vide temporaire
    */
-  private $emptyRessource;
+  protected $emptyRessource;
 
   /**
    * @var ressource  Ressource image après traitement
    */
-  private $buildedRessource;
+  protected $buildedRessource;
 
   /**
    * @var string  Extension du fichier. (lowercase)
    */
-  private $extension;
+  protected $extension;
 
   /**
    * @var array   Filtres applicables. (Tableau d'AbstractFilter)
    */
-  private $filters = array();
+  protected $filters = array();
 
   /**
    * @var integer Qualité appliquée à l'écriture des fichiers de type JPEG
    */
-  private $jpgQuality = 100;
+  protected $jpgQuality = 100;
 
   /**
    * @var integer Degré de compression appliqué à l'écriture des fichiers de type PNG
    */
-  private $pngCompression = 0;
+  protected $pngCompression = 0;
 
   /**
    * Crée un objet Image à partir d'une ressouce GD
@@ -404,7 +404,7 @@ class Image
    *
    * @return resource
    */
-  private function applyFilters()
+  protected function applyFilters()
   {
     if ($this->emptyRessource) {
       $source = $this->emptyRessource;

@@ -16,7 +16,7 @@ class ImageInfo
   /**
    * @var Image  Image
    */
-  private $image;
+  protected $image;
 
   public function __construct($imagePath)
   {
